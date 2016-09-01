@@ -95,6 +95,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EODG.ElementaryEncryption.Engine\EODG.ElementaryEncryption.Engine.csproj">
+      <Project>{7431fe2e-8d45-467a-8d09-66e223b98186}</Project>
+      <Name>EODG.ElementaryEncryption.Engine</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
