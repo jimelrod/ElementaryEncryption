@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EODG.ElementaryEncryption.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EODG.ElementaryEncryption.Engine", "EODG.ElementaryEncryption.Engine\EODG.ElementaryEncryption.Engine.csproj", "{7431FE2E-8D45-467A-8D09-66E223B98186}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EODG.ElementaryEncryption.Test.Engine", "EODG.ElementaryEncryption.Test.Engine\EODG.ElementaryEncryption.Test.Engine.csproj", "{55D5FE9A-8EE5-4684-A53E-EB7EDCC2DF75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{4059ECA8-361A-4272-B87B-078B47CEDAD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,15 @@ Global
 		{7431FE2E-8D45-467A-8D09-66E223B98186}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7431FE2E-8D45-467A-8D09-66E223B98186}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7431FE2E-8D45-467A-8D09-66E223B98186}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55D5FE9A-8EE5-4684-A53E-EB7EDCC2DF75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55D5FE9A-8EE5-4684-A53E-EB7EDCC2DF75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55D5FE9A-8EE5-4684-A53E-EB7EDCC2DF75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55D5FE9A-8EE5-4684-A53E-EB7EDCC2DF75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{55D5FE9A-8EE5-4684-A53E-EB7EDCC2DF75} = {4059ECA8-361A-4272-B87B-078B47CEDAD9}
 	EndGlobalSection
 EndGlobal

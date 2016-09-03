@@ -23,6 +23,7 @@ namespace EODG.ElementaryEncryption.Ui
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }

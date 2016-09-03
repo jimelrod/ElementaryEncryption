@@ -32,7 +32,7 @@ namespace EODG.ElementaryEncryption.Engine
         /// </summary>
         /// <param name="plainText">Text to be encrypted</param>
         /// <returns>EncryptionData instance containing cipher, key, and initialization vector</returns>
-        public EncryptionData Encrypt(string plainText)
+        public AesEncryptionData Encrypt(string plainText)
         {
             using (var aesAlg = new AesManaged())
             {
@@ -47,12 +47,12 @@ namespace EODG.ElementaryEncryption.Engine
         /// <param name="key">Encryption Key</param>
         /// <param name="initializationVector">Initialization Vector</param>
         /// <returns>EncryptionData instance containing cipher, key, and initialization vector</returns>
-        public EncryptionData Encrypt(string plainText, string key, string initializationVector)
+        public AesEncryptionData Encrypt(string plainText, string key, string initializationVector)
         {
             using (var aesAlg = new AesManaged())
             {
-                aesAlg.Key = _converter.GetByteArray(key);
-                aesAlg.IV = _converter.GetByteArray(initializationVector);
+                aesAlg.Key = _converter.ConvertHex(key);
+                aesAlg.IV = _converter.ConvertHex(initializationVector);
 
                 return Encrypt(plainText, aesAlg);
             }
@@ -63,7 +63,7 @@ namespace EODG.ElementaryEncryption.Engine
         /// </summary>
         /// <param name="encryptionData">EncryptionData instance containing cipher, key, and initialization vector</param>
         /// <returns>Plain text of decrypted cipher</returns>
-        public string Decrypt(EncryptionData encryptionData)
+        public string Decrypt(AesEncryptionData encryptionData)
         {
             return Decrypt(encryptionData.Cipher, encryptionData.Key, encryptionData.InitializationVector);
         }
@@ -81,12 +81,12 @@ namespace EODG.ElementaryEncryption.Engine
 
             using (AesManaged aesAlg = new AesManaged())
             {
-                aesAlg.Key = _converter.GetByteArray(key);
-                aesAlg.IV = _converter.GetByteArray(initializationVector);
+                aesAlg.Key = _converter.ConvertHex(key);
+                aesAlg.IV = _converter.ConvertHex(initializationVector);
 
                 ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
 
-                using (MemoryStream msDecrypt = new MemoryStream(_converter.GetByteArray(cipher)))
+                using (MemoryStream msDecrypt = new MemoryStream(_converter.ConvertHex(cipher)))
                 {
                     using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                     {
@@ -111,9 +111,9 @@ namespace EODG.ElementaryEncryption.Engine
         /// <param name="plainText">Text to be encrypted<</param>
         /// <param name="aesAlg">AesManaged instance</param>
         /// <returns>EncryptionData instance containing cipher, key, and initialization vector</returns>
-        private EncryptionData Encrypt(string plainText, AesManaged aesAlg)
+        private AesEncryptionData Encrypt(string plainText, AesManaged aesAlg)
         {
-            EncryptionData encryptionData;
+            AesEncryptionData encryptionData;
             ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
             using (MemoryStream msEncrypt = new MemoryStream())
@@ -125,12 +125,11 @@ namespace EODG.ElementaryEncryption.Engine
                         swEncrypt.Write(plainText);
                     }
 
-                    encryptionData = new EncryptionData
-                    {
-                        Cipher = _converter.GetString(msEncrypt.ToArray()),
-                        InitializationVector = _converter.GetString(aesAlg.IV),
-                        Key = _converter.GetString(aesAlg.Key)
-                    };
+                    string cipher = _converter.ConvertHex(msEncrypt.ToArray());
+                    string initializationVector = _converter.ConvertHex(aesAlg.IV);
+                    string key = _converter.ConvertHex(aesAlg.Key);
+
+                    encryptionData = new AesEncryptionData(cipher, initializationVector, key);
                 }
             }
 
