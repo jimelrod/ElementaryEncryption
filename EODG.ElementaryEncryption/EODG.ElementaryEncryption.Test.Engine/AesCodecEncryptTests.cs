@@ -39,5 +39,7 @@ namespace EODG.ElementaryEncryption.Test.Engine
 
             Assert.IsTrue(_codec.Decrypt(aesEncryptionData) == StaticValues.ExpectedPlainText);
         }
+
+        // TODO: Finish Tests!!!
     }
 }
