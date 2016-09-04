@@ -21,7 +21,7 @@ namespace EODG.ElementaryEncryption.Test.Engine
         [TestMethod]
         public void ConvertStringToByteArrayGivesProperResult()
         {
-            var hexByteAry = _converter.ConvertHex(_expectedHexString);
+            var hexByteAry = _converter.Convert(_expectedHexString);
             Assert.IsTrue(hexByteAry.SequenceEqual(_expectedHexByteArray));
         }
 
@@ -32,7 +32,7 @@ namespace EODG.ElementaryEncryption.Test.Engine
 
             try
             {
-                _converter.ConvertHex(_invalidHexString);
+                _converter.Convert(_invalidHexString);
             }
             catch
             {
@@ -45,7 +45,7 @@ namespace EODG.ElementaryEncryption.Test.Engine
         [TestMethod]
         public void ConvertByteArrayToStringGivesProperResult()
         {
-            var hexString = _converter.ConvertHex(_expectedHexByteArray);            
+            var hexString = _converter.Convert(_expectedHexByteArray);            
             Assert.IsTrue(hexString == _expectedHexString);
         }
     }

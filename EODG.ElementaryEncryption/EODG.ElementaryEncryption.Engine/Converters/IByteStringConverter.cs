@@ -2,7 +2,7 @@
 {
     public interface IByteStringConverter
     {
-        string ConvertHex(byte[] ba);
-        byte[] ConvertHex(string s);
+        string Convert(byte[] ba);
+        byte[] Convert(string s);
     }
 }

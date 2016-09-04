@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace EODG.ElementaryEncryption.Engine.Converters
 {
@@ -11,29 +10,34 @@ namespace EODG.ElementaryEncryption.Engine.Converters
     public class HexConverter : IByteStringConverter
     {
         /// <summary>
-        /// 
+        /// Converts a string of hexadecimal values to its byte array equivalent
         /// </summary>
-        /// <param name="hexString">String of hexadecimal characters</param>
+        /// <param name="s">String of hexadecimal characters</param>
         /// <returns></returns>
-        public byte[] ConvertHex(string hexString)
+        public byte[] Convert(string s)
         {
-            if (!IsValidHexString(hexString))
+            if (!Util.IsValidHexString(s))
             {
-                throw new ArgumentException(string.Format("String supplied contains invalid hexadecimal values.\nString supplied: \"{0}\"", hexString), "hexString");
+                throw new ArgumentException(string.Format("String supplied contains invalid hexadecimal values.\nString supplied: \"{0}\"", s), "hexString");
             }
 
-            var numberChars = hexString.Length;
+            var numberChars = s.Length;
             var bytes = new byte[numberChars / 2];
 
             for (int i = 0; i < numberChars; i += 2)
             {
-                bytes[i / 2] = Convert.ToByte(hexString.Substring(i, 2), 16);
+                bytes[i / 2] = System.Convert.ToByte(s.Substring(i, 2), 16);
             }
 
             return bytes;
         }
 
-        public string ConvertHex(byte[] ba)
+        /// <summary>
+        /// Converts a byte array to its hexadecimal string equivalent
+        /// </summary>
+        /// <param name="ba"></param>
+        /// <returns></returns>
+        public string Convert(byte[] ba)
         {
             var hex = new StringBuilder(ba.Length * 2);
 
@@ -43,12 +47,6 @@ namespace EODG.ElementaryEncryption.Engine.Converters
             }
 
             return hex.ToString();
-        }
-
-        private bool IsValidHexString(string s)
-        {
-            var hexRgx = new Regex(@"^[0-9a-f]*$", RegexOptions.IgnoreCase);
-            return hexRgx.IsMatch(s) && s.Length % 2 == 0;
         }
     }
 }
