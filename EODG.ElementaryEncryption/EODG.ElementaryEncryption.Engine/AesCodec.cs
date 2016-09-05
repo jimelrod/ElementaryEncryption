@@ -47,7 +47,7 @@ namespace EODG.ElementaryEncryption.Engine
         /// <returns>EncryptionData instance containing cipher, key, and initialization vector</returns>
         public AesEncryptionData Encrypt(string plainText, string key)
         {
-            return Encrypt(plainText, GenerateKey(), GenerateInitializationVector());
+            return Encrypt(plainText, key, GenerateInitializationVector());
         }
 
         /// <summary>
